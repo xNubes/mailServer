@@ -10,7 +10,7 @@ import org.springframework.context.event.EventListener;
 public class SpringBootStarterMailApplication {
 
 	@Autowired
-	private EmailSenderService senderService;
+	private EmailSender senderService;
 
 	private Details details;
 
@@ -21,6 +21,6 @@ public class SpringBootStarterMailApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void sendEmail() throws Exception {
-		senderService.sendMail(details);
+		EmailSender.sendMail(details);
 	}
 }
