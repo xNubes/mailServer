@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -37,15 +37,18 @@ public class EmailSenderService {
         model.put("email",details.getEmail());
         model.put("subject",details.getSubject());
         model.put("message",details.getMessage());
+        model.put("reciever",details.getReceiver());
 
         Context context = new Context();
         context.setVariables(model);
         String html = templateEngine.process("sampleEmail", context);
 
         try {
-            helper.setTo(details.getEmail());
-            helper.setText(html,true);
-            helper.setSubject("Test Mail");
+            helper.setFrom(details.getEmail());
+            helper.setText(details.getMessage());
+            helper.setSubject(details.getSubject());
+            helper.setName(details.getName());
+            helper.setTo(details.getReceiver());
         } catch (javax.mail.MessagingException e) {
             e.printStackTrace();
         }
