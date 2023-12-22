@@ -1,9 +1,9 @@
 package com.springframework.boot.springbootstartermail;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.templatemode.StandardTemplateModeHandlers;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +23,7 @@ public class EmailThymeleafConfiguration {
         SpringResourceTemplateResolver pdfTemplateResolver = new SpringResourceTemplateResolver();
         pdfTemplateResolver.setPrefix("com/springframework/boot/springbootstartermail/sampleEmail");
         pdfTemplateResolver.setSuffix(".html");
-        pdfTemplateResolver.setTemplateMode(StandardTemplateModeHandlers.HTML5.getTemplateModeName());
+        pdfTemplateResolver.setTemplateMode(TemplateMode.HTML);
         pdfTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
         return pdfTemplateResolver;
     }
