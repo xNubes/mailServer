@@ -21,7 +21,7 @@ public class EmailThymeleafConfiguration {
     @Bean
     public SpringResourceTemplateResolver htmlTemplateResolver() {
         SpringResourceTemplateResolver pdfTemplateResolver = new SpringResourceTemplateResolver();
-        pdfTemplateResolver.setPrefix("com/springframework/boot/springbootstartermail/sampleEmail");
+        pdfTemplateResolver.setPrefix("classpath:/templates/");
         pdfTemplateResolver.setSuffix(".html");
         pdfTemplateResolver.setTemplateMode(TemplateMode.HTML);
         pdfTemplateResolver.setCharacterEncoding(StandardCharsets.UTF_8.name());
