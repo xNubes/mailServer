@@ -12,12 +12,15 @@ public class SpringBootStarterMailApplication {
 	@Autowired
 	private EmailSenderService senderService;
 
+	private Details details;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootStarterMailApplication.class, args);
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void sendEmail() {
+	public void sendEmail() throws Exception {
 		senderService.sendMail(details);
 	}
 }
