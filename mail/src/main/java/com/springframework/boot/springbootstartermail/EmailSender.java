@@ -1,72 +1,59 @@
 package com.springframework.boot.springbootstartermail;
+
+import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.TemplateEngine;
+import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("/test-app")
-@Controller
+@RequestMapping("mail-sender")
+@RestController
 public class EmailSender {
     @Autowired
-    static SpringTemplateEngine templateEngine;
+    private SpringTemplateEngine templateEngine;
 
     @Autowired
-    private static JavaMailSender sender;
+    private JavaMailSender sender;
 
-    @RequestMapping("/get-details")
-    public static @ResponseBody Details sendMail(@RequestBody Details details) throws Exception {
+    @PostMapping("send-mail")
+    public ResponseEntity<Details> sendMail(@RequestBody Details details) {
 
         MimeMessage message = sender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,
-                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-                StandardCharsets.UTF_8.name());
+
         try {
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put("name",details.getName());
-        model.put("email",details.getEmail());
-        model.put("subject",details.getSubject());
-        model.put("message",details.getMessage());
+            message.setFrom(new InternetAddress("troumble@gmail.com", "TerminHelper"));
+            message.setRecipients(Message.RecipientType.TO, details.receiver());
+            message.setSubject(details.subject());
 
-        Context context = new Context();
-        context.setVariables(model);
-        String html = templateEngine.process("email-template", context);
+            Map<String, Object> model = new HashMap<>();
+            model.put("name", details.name());
+            model.put("email", details.email());
+            model.put("message", details.message());
 
-        helper.setTo(details.getEmail());
-        helper.setText(html, true);
-        helper.setSubject("Test Mail");
-    } catch (MessagingException e) {
-        e.printStackTrace();
-    }
-        sender.send(message);
-        return details;
-    }
-    @Configuration
-    class AppConfig {
+            Context context = new Context();
+            context.setVariables(model);
+            String html = templateEngine.process("sampleEmail", context);
 
-        @Bean
-        public TemplateEngine templateEngine() {
-            return new SpringTemplateEngine();
+            message.setContent(html, "text/html; charset=UTF-8");
+            sender.send(message);
+
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(details);
         }
-
-        @Bean
-        public JavaMailSender javaMailSender() {
-                return (JavaMailSender) new AppConfig();
-        }
+        return ResponseEntity.ok(details);
     }
 }
 
