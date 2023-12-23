@@ -5,22 +5,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 @Configuration
 public class AppConfig {
 
-    @Value("smtp.gmail.de")
+    @Value("${spring.mail.host}")
     private String host;
 
-    @Value("587")
+    @Value("${spring.mail.port:547}")
     private int port;
 
-    @Value("troumble@gmail.com")
+    @Value("${spring.mail.username}")
     private String username;
 
-    @Value("xkws dxff wglo qizt")
+    @Value("${spring.mail.password}")
     private String password;
 
     @Bean
