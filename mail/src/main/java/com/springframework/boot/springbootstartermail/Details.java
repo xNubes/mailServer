@@ -1,14 +1,14 @@
 package com.springframework.boot.springbootstartermail;
 public class Details {
-    private String name;
+    private String name = "Robin";
 
-    private String subject;
+    private String subject = "Termin";
 
-    private String message;
+    private String message = "Ich will meinen Termin ändern";
 
-    private String email;
+    private String email ="troumble@gmail.com";
 
-    private String receiver;
+    private String receiver ="robin@juenemanns.de";
 
     public String getReceiver() {
         return receiver;
