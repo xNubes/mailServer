@@ -1,13 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Template</title>
 </head>
-<body>
-    <p th:text="${'Name      : ' + name}"></p>
-    <p th:text="${'E-Mail    :' + email}"></p>
-    <p th:text="${'Nachricht : ' + message}"></p>
+<body style="margin:0;">
+<div style="background-color:#f9f9f9;display:flex;justify-content:center;flex-direction:column;">
+    <div style="height:5rem;width:30rem;background-color:#0e1125;align-self:center;">
+        <h1 style="color:white;margin:0;padding-top:1rem;text-align:center;">Automatischer E-Mail Sender</h1>
+    </div>
+    <div style="display:flex;justify-content:center;min-height:23rem;background-color:#f9f9f9;">
+        <div style="width:30rem;background-color:white;">
+            <p style="margin:0.5rem 1rem 0 1rem;padding-top:1rem;">Hallo,</p>
+            <p style="margin:0.5rem 1rem 0 1rem;" th:text="${'die folgende E-Mail Addresse hat eine
+                Nachricht gesendet: ' + email}"></p>
+            <p style="margin:0.5rem 1rem 0 1rem;" th:text="${name + ' hat die folgende Nachricht
+                gesendet:'}"></p>
+            <p style="margin:0.5rem 0 0 1rem;" th:text="${message}"></p>
+        </div>
+    </div>
+    <div style="width:30rem;background-color:white;align-self:center;">
+        <p style="margin:0.5rem 1rem 1rem 1rem;font-style:italic;">Sollten sie diese E-Mail fälschlicherweise erhalten
+            wenden
+            sie sich bitte an
+            die unten
+            genannte E-Mail
+            Address.</p>
+    </div>
+    <div style="height:8rem;width:30rem;background-color:#0e1125;align-self:center">
+        <div>
+            <p></p>
+        </div>
+    </div>
+</div>
 </body>
