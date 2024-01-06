@@ -10,29 +10,33 @@
 <body style="margin:0;">
 <div style="background-color:#f9f9f9;display:flex;justify-content:center;flex-direction:column;">
     <div style="height:5rem;width:30rem;background-color:#0e1125;align-self:center;">
-        <h1 style="color:white;margin:0;padding-top:1rem;text-align:center;">Automatischer E-Mail Sender</h1>
+        <h1 style="color:white;margin:0;padding-top:1rem;text-align:center;">Hansemedizin E-Mail Sender</h1>
     </div>
     <div style="display:flex;justify-content:center;min-height:23rem;background-color:#f9f9f9;">
         <div style="width:30rem;background-color:white;">
-            <p style="margin:0.5rem 1rem 0 1rem;padding-top:1rem;">Hallo,</p>
-            <p style="margin:0.5rem 1rem 0 1rem;" th:text="${'die folgende E-Mail Addresse hat eine
+            <p style="margin:0.5rem 1rem 0 1rem;padding-top:1rem;font-family:Arial;">Hallo,</p>
+            <p style="margin:0.5rem 1rem 0 1rem;font-family:Arial;" th:text="${'die folgende E-Mail Addresse hat eine
                 Nachricht gesendet: ' + email}"></p>
-            <p style="margin:0.5rem 1rem 0 1rem;" th:text="${name + ' hat die folgende Nachricht
+            <p style="margin:0.5rem 1rem 0 1rem;font-family:Arial;" th:text="${name + ' hat die folgende Nachricht
                 gesendet:'}"></p>
-            <p style="margin:0.5rem 0 0 1rem;" th:text="${message}"></p>
+            <p style="margin:0.5rem 0 0 1rem;font-family:Arial;" th:text="${message}"></p>
         </div>
     </div>
     <div style="width:30rem;background-color:white;align-self:center;">
-        <p style="margin:0.5rem 1rem 1rem 1rem;font-style:italic;">Sollten sie diese E-Mail fälschlicherweise erhalten
+        <p style="margin:0.5rem 1rem 1rem 1rem;font-style:italic;font-family:Arial;">Sollten sie diese E-Mail
+            fälschlicherweise erhalten
             wenden
             sie sich bitte an
             die unten
             genannte E-Mail
-            Address.</p>
+            Addresse.</p>
     </div>
     <div style="height:8rem;width:30rem;background-color:#0e1125;align-self:center">
         <div>
-            <p></p>
+            <p style="color:white;margin: 1rem 0 0.5rem 1rem;font-family:Arial;">Hansemedizin</p>
+            <p style="color:white;margin: 0 0 0.5rem 1rem;font-family:Arial;">Robin Jünemann</p>
+            <p style="color:white;margin: 0 0 0.5rem 1rem;font-family:Arial;">robin@juenemanns.de</p>
+
         </div>
     </div>
 </div>
