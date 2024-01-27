@@ -29,6 +29,7 @@ public class AppConfig {
     @Value("${spring.mail.password}")
     private String password;
 
+    //configures the JavaMailSender interface
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
@@ -47,6 +48,7 @@ public class AppConfig {
 
     }
 
+    // configures the Thymeleaf template engine
     @Bean
     public TemplateEngine emailTemplateEngine() {
         final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -54,6 +56,7 @@ public class AppConfig {
         return templateEngine;
     }
 
+    //configures a Thymeleaf template resolver for resolving HTML templates
     private ITemplateResolver htmlTemplateResolver() {
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("/templates/");

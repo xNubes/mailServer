@@ -27,16 +27,20 @@ public class EmailSender {
     @Autowired
     private JavaMailSender sender;
 
+
     @PostMapping("send-mail")
     public ResponseEntity<Details> sendMail(@RequestBody Details details) {
 
+        //Creates a MimeMessage using the injected JavaMailSender.
         MimeMessage message = sender.createMimeMessage();
 
         try {
+            //Sets the sender's information.
             message.setFrom(new InternetAddress("troumble@gmail.com", "TerminHelper"));
             message.setRecipients(Message.RecipientType.TO, details.receiver());
             message.setSubject(details.subject());
 
+            //Creates a Thymeleaf Context and adds variables (name, email, message) to be used in the email template.
             Map<String, Object> model = new HashMap<>();
             model.put("name", details.name());
             model.put("email", details.email());
@@ -49,6 +53,7 @@ public class EmailSender {
             message.setContent(html, "text/html; charset=UTF-8");
             sender.send(message);
 
+            //Catches MessagingException and UnsupportedEncodingException and prints the stack trace.
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().body(details);
